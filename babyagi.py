@@ -13,14 +13,14 @@ class TaskCreationChain(LLMChain):
     def from_llm(cls, llm: BaseLLM, objective: str, verbose: bool = True) -> LLMChain:
         """Get the response parser."""
         task_creation_template = (
-            "You are an task creation AI that uses the result of an execution agent"
-            " to create new tasks with the following objective: {objective},"
-            " The last completed task has the result: {result}."
-            " This result was based on this task description: {task_description}."
-            " These are incomplete tasks: {incomplete_tasks}."
-            " Based on the result, create new tasks to be completed"
-            " by the AI system that do not overlap with incomplete tasks."
-            " Return the tasks as an array."
+            " Anda adalah AI pembuatan tugas yang menggunakan hasil dari agen eksekusi"
+            " untuk membuat tugas baru dengan tujuan sebagai berikut: {objective},"
+            " Tugas terakhir yang diselesaikan memiliki hasil: {result}."
+            " Hasil ini didasarkan pada deskripsi tugas ini: {task_description}."
+            " Ini adalah tugas yang tidak lengkap: {incomplete_tasks}."
+            " Berdasarkan hasilnya, buat tugas baru untuk diselesaikan"
+            " oleh sistem AI yang tidak tumpang tindih dengan tugas yang belum selesai."
+            " Kembalikan tugas sebagai larik."
         )
         prompt = PromptTemplate(
             template=task_creation_template,
@@ -44,13 +44,13 @@ class TaskPrioritizationChain(LLMChain):
     def from_llm(cls, llm: BaseLLM, objective: str, verbose: bool = True) -> LLMChain:
         """Get the response parser."""
         task_prioritization_template = (
-            "You are an task prioritization AI tasked with cleaning the formatting of and reprioritizing"
-            " the following tasks: {task_names}."
-            " Consider the ultimate objective of your team: {objective}."
-            " Do not remove any tasks. Return the result as a numbered list, like:"
-            " #. First task"
-            " #. Second task"
-            " Start the task list with number {next_task_id}."
+            "Anda adalah AI yang memprioritaskan tugas yang bertugas membersihkan pemformatan dan memprioritaskan ulang"
+            " tugas-tugas berikut: {task_names}."
+            " Pertimbangkan tujuan akhir tim Anda: {objective}."
+            " angan hapus tugas apa pun. Kembalikan hasilnya sebagai daftar bernomor, seperti:"
+            " #. Tugas pertama"
+            " #. Tugas Kedua"
+            " Mulai daftar tugas dengan nomor {next_task_id}."
         )
         prompt = PromptTemplate(
             template=task_prioritization_template,
@@ -86,9 +86,9 @@ class ExecutionChain(LLMChain):
     def from_llm(cls, llm: BaseLLM, vectorstore: VectorStore, verbose: bool = True) -> LLMChain:
         """Get the response parser."""
         execution_template = (
-            "You are an AI who performs one task based on the following objective: {objective}."
-            " Take into account these previously completed tasks: {context}."
-            " Your task: {task}."
+            "nda adalah AI yang melakukan satu tugas berdasarkan tujuan berikut: {objective}."
+            " Pertimbangkan tugas-tugas yang telah diselesaikan sebelumnya: {context}."
+            " Tugas Anda {task}."
             " Response:"
         )
         prompt = PromptTemplate(
